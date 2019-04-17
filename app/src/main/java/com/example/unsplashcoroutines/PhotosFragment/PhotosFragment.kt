@@ -27,7 +27,6 @@ class PhotosFragment : Fragment() {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        this.retainInstance = true
         val v: View = inflater.inflate(R.layout.fr_photos, container, false)
         setHasOptionsMenu(true)
         photosViewModel = ViewModelProviders.of(this).get(PhotosViewModel::class.java)
@@ -36,7 +35,6 @@ class PhotosFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         recycler.layoutManager = LinearLayoutManager(context)
-
         photosAdapter = PhotosAdapter(ArrayList<Result>(10))
         photosAdapter.photosList = ApplicationSingleton.currentPhotos
         recycler.adapter = photosAdapter
@@ -44,7 +42,10 @@ class PhotosFragment : Fragment() {
         photosViewModel.searhResponse.observe(this, Observer { photos ->
             photosAdapter.photosList = photos.results
             photosAdapter.notifyDataSetChanged()
+            Log.i("photosFragmentb",photos.results[0].links.download)
         })
+
+
     }
 
 

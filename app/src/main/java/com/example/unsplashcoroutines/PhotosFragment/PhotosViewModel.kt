@@ -28,6 +28,7 @@ class PhotosViewModel :ViewModel(){
             searhResponse.value = networkService.getPhotos(query).await()
             ApplicationSingleton.currentPhotos.addAll(searhResponse.value!!.results)
         }
+
     }
 
     override fun onCleared() {

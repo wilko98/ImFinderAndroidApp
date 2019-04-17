@@ -12,7 +12,7 @@ class ApplicationSingleton :Application(){
 
     override fun onCreate() {
         currentPhotos = ArrayList(10)
-        networkService= NetworkService.invoke()
+        networkService = NetworkService.invoke()
         super.onCreate()
     }
 }
