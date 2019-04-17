@@ -16,7 +16,7 @@ import android.app.Application as Application1
 
 class PhotosFragment : Fragment() {
 
-    lateinit var photosViewModel:PhotosViewModel
+    lateinit var photosViewModel: PhotosViewModel
     lateinit var photosAdapter: PhotosAdapter
 
     companion object {
@@ -26,7 +26,7 @@ class PhotosFragment : Fragment() {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-        val v:View = inflater.inflate(R.layout.fr_photos,container,false)
+        val v: View = inflater.inflate(R.layout.fr_photos, container, false)
         setHasOptionsMenu(true)
         photosViewModel = ViewModelProviders.of(this).get(PhotosViewModel::class.java)
         return v
@@ -34,10 +34,12 @@ class PhotosFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         recycler.layoutManager = LinearLayoutManager(context)
-        photosAdapter = PhotosAdapter(ArrayList<Result>(10))
-        Log.i("photosFragment",photosAdapter.toString())
-        recycler.adapter = photosAdapter
 
+        photosAdapter = PhotosAdapter(ArrayList<Result>(10))
+        Log.i("photosFragment", "view model: " + photosViewModel.currentPhotos.size.toString())
+        photosAdapter.photosList = photosViewModel.currentPhotos
+        recycler.adapter = photosAdapter
+        Log.i("photosFragmentb", photosViewModel.toString())
         photosViewModel.searhResponse.observe(this, Observer { photos ->
             photosAdapter.photosList = photos.results
             photosAdapter.notifyDataSetChanged()
@@ -45,13 +47,12 @@ class PhotosFragment : Fragment() {
     }
 
 
-
     override fun onCreateOptionsMenu(menu: Menu?, inflater: MenuInflater?) {
-        inflater?.inflate(R.menu.menu,menu)
+        inflater?.inflate(R.menu.menu, menu)
         val searchItem = menu?.findItem(R.id.action_search)
         val searchView = searchItem?.actionView as SearchView
         searchView.setQueryHint("Search Photos")
-        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 photosViewModel.searchPhotos(query.toString())
                 return true

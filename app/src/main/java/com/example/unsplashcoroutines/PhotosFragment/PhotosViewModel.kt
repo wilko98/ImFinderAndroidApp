@@ -1,5 +1,6 @@
 package com.example.unsplashcoroutines.PhotosFragment
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -25,6 +26,7 @@ class PhotosViewModel :ViewModel(){
             searhResponse.value = networkService.getPhotos(query).await()
             currentPhotos.clear()
             currentPhotos.addAll(searhResponse.value!!.results)
+            Log.i("photosFragment","view model asdf: "+ currentPhotos.size.toString())
         }
     }
 }
