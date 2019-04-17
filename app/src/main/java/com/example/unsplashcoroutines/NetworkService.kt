@@ -49,7 +49,6 @@ interface NetworkService {
                 .addCallAdapterFactory(CoroutineCallAdapterFactory())
                 .addConverterFactory(GsonConverterFactory.create())
                 .build().create(NetworkService::class.java)
-
         }
 
     }
