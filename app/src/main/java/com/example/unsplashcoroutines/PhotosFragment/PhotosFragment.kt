@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.example.unsplashcoroutines.ApplicationSingleton
 import com.example.unsplashcoroutines.R
 import com.example.unsplashcoroutines.Response.Result
 import com.example.unsplashcoroutines.Response.SearhResponse
@@ -26,6 +27,7 @@ class PhotosFragment : Fragment() {
     }
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        this.retainInstance = true
         val v: View = inflater.inflate(R.layout.fr_photos, container, false)
         setHasOptionsMenu(true)
         photosViewModel = ViewModelProviders.of(this).get(PhotosViewModel::class.java)
@@ -36,8 +38,7 @@ class PhotosFragment : Fragment() {
         recycler.layoutManager = LinearLayoutManager(context)
 
         photosAdapter = PhotosAdapter(ArrayList<Result>(10))
-        Log.i("photosFragment", "view model: " + photosViewModel.currentPhotos.size.toString())
-        photosAdapter.photosList = photosViewModel.currentPhotos
+        photosAdapter.photosList = ApplicationSingleton.currentPhotos
         recycler.adapter = photosAdapter
         Log.i("photosFragmentb", photosViewModel.toString())
         photosViewModel.searhResponse.observe(this, Observer { photos ->

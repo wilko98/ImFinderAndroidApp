@@ -16,17 +16,21 @@ import kotlinx.coroutines.launch
 
 class PhotosViewModel :ViewModel(){
 
+
+    init {
+        Log.i("photosFragment","ViewModelCreated")
+    }
     var networkService: NetworkService = ApplicationSingleton.networkService
     var searhResponse = MutableLiveData<SearhResponse>()
-    var currentPhotos: ArrayList<Result> = ArrayList(10)
-
 
     fun searchPhotos(query:String){
         GlobalScope.launch(Dispatchers.Main) {
             searhResponse.value = networkService.getPhotos(query).await()
-            currentPhotos.clear()
-            currentPhotos.addAll(searhResponse.value!!.results)
-            Log.i("photosFragment","view model asdf: "+ currentPhotos.size.toString())
+            ApplicationSingleton.currentPhotos.addAll(searhResponse.value!!.results)
         }
+    }
+
+    override fun onCleared() {
+        Log.i("photosFragment","onCleared")
     }
 }
