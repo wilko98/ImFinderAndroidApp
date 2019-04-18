@@ -65,4 +65,8 @@ dependencies {
 
     //Picasso
     implementation 'com.squareup.picasso:picasso:2.5.2'
+
+    // koin for Android and AndroidX
+    implementation 'org.koin:koin-androidx-scope:2.0.0-beta-4'
+    implementation 'org.koin:koin-android-scope:2.0.0-beta-4'
 }
