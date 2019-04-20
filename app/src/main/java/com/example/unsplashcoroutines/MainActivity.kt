@@ -9,6 +9,7 @@ import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.ViewModelProviders
 import com.example.unsplashcoroutines.PhotosFragment.PhotosFragment
 import com.example.unsplashcoroutines.PhotosFragment.PhotosViewModel
+import org.koin.android.ext.android.inject
 
 class MainActivity : AppCompatActivity() {
 
@@ -17,11 +18,13 @@ class MainActivity : AppCompatActivity() {
         lateinit var networkService:NetworkService
     }
 
+//    val networkService:NetworkService by inject()
     override fun onCreate(savedInstanceState: Bundle?){
         super.onCreate(savedInstanceState)
         setContentView(R.layout.ac_main)
         changeFragment(PhotosFragment.newInstanse())
         networkService = NetworkService.invoke()
+//        photosViewModel = PhotosViewModel(networkService)
         photosViewModel = ViewModelProviders.of(this).get(PhotosViewModel::class.java)
     }
 

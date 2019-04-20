@@ -7,7 +7,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.unsplashcoroutines.MainActivity
 import com.example.unsplashcoroutines.R
 import com.example.unsplashcoroutines.Response.Result
-import com.squareup.picasso.Picasso
 
 class PhotosAdapter(var photosList: List<Result>) :RecyclerView.Adapter<PhotosHolder>(){
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PhotosHolder {
