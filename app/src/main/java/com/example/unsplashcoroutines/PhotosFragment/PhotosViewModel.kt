@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.unsplashcoroutines.ApplicationSingleton
 import com.example.unsplashcoroutines.MainActivity
@@ -17,18 +18,17 @@ import kotlinx.coroutines.launch
 
 class PhotosViewModel :ViewModel(){
 
-
     init {
         Log.i("photosFragment","ViewModelCreated")
     }
     var networkService: NetworkService = MainActivity.networkService
-    var searhResponse = MutableLiveData<SearhResponse>()
-    var currentPhotos:List<Result> = ArrayList<Result>(10)
+    var searchResponse = MutableLiveData<SearhResponse>()
+    var currentQuery = ""
 
     fun searchPhotos(query:String){
-        GlobalScope.launch(Dispatchers.Main) {
-            searhResponse.value = networkService.getPhotos(query).await()
-            currentPhotos = searhResponse.value!!.results
+        viewModelScope.launch(Dispatchers.Main) {
+            currentQuery = query
+            searchResponse.value = networkService.getPhotos(query).await()
         }
     }
 
@@ -37,3 +37,4 @@ class PhotosViewModel :ViewModel(){
     }
 
 }
+

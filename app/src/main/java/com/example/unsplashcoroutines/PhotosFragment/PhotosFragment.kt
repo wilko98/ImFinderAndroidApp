@@ -6,13 +6,10 @@ import android.view.*
 import android.widget.SearchView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.unsplashcoroutines.ApplicationSingleton
 import com.example.unsplashcoroutines.MainActivity
 import com.example.unsplashcoroutines.R
 import com.example.unsplashcoroutines.Response.Result
-import com.example.unsplashcoroutines.Response.SearhResponse
 import kotlinx.android.synthetic.main.fr_photos.*
 import android.app.Application as Application1
 
@@ -37,13 +34,11 @@ class PhotosFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         recycler.layoutManager = LinearLayoutManager(context)
         photosAdapter = PhotosAdapter(ArrayList<Result>(10))
-        photosAdapter.photosList = photosViewModel.currentPhotos
         recycler.adapter = photosAdapter
         Log.i("photosFragmentb", photosViewModel.toString())
-        photosViewModel.searhResponse.observe(this, Observer { photos ->
+        photosViewModel.searchResponse.observe(this, Observer { photos ->
             photosAdapter.photosList = photos.results
             photosAdapter.notifyDataSetChanged()
-            Log.i("photosFragmentb",photos.results[0].links.download)
         })
 
 
