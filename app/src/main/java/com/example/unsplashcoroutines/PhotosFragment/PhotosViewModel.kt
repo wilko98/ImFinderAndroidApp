@@ -1,19 +1,13 @@
 package com.example.unsplashcoroutines.PhotosFragment
 
 import android.util.Log
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.unsplashcoroutines.ApplicationSingleton
 import com.example.unsplashcoroutines.MainActivity
 import com.example.unsplashcoroutines.NetworkService
-import com.example.unsplashcoroutines.Response.Result
 import com.example.unsplashcoroutines.Response.SearhResponse
-import kotlinx.android.synthetic.main.fr_photos.*
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
 class PhotosViewModel :ViewModel(){

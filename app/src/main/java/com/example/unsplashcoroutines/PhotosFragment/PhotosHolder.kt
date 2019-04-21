@@ -2,9 +2,8 @@ package com.example.unsplashcoroutines.PhotosFragment
 
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
-import com.example.unsplashcoroutines.R
+import com.bumptech.glide.Glide
 import com.example.unsplashcoroutines.Response.Result
-import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.li_photo.view.*
 
 class PhotosHolder(view:View):RecyclerView.ViewHolder(view){
@@ -14,6 +13,6 @@ class PhotosHolder(view:View):RecyclerView.ViewHolder(view){
     fun bind(photo: Result){
         author.text = photo.user.username
         likes.text = photo.likes.toString()
-        Picasso.with(itemView.context).load(photo.urls.regular).into(image)
+        Glide.with(itemView.context).load(photo.urls.regular).into(image)
     }
 }
