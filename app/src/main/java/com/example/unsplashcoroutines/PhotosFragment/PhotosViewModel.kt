@@ -10,15 +10,14 @@ import com.example.unsplashcoroutines.Response.SearhResponse
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class PhotosViewModel :ViewModel(){
+class PhotosViewModel(val networkService: NetworkService) :ViewModel(){
 
     init {
         Log.i("photosFragment","ViewModelCreated")
     }
-    var networkService: NetworkService = MainActivity.networkService
+
     var searchResponse = MutableLiveData<SearhResponse>()
     var currentQuery = ""
-
     fun searchPhotos(query:String){
         viewModelScope.launch(Dispatchers.Main) {
             currentQuery = query
