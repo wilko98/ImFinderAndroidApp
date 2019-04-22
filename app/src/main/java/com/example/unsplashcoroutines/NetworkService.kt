@@ -1,6 +1,8 @@
 package com.example.unsplashcoroutines
 
 
+import com.example.unsplashcoroutines.Response.ConnectivityInterceptor
+import com.example.unsplashcoroutines.Response.ConnectivityInterceptorImpl
 import com.example.unsplashcoroutines.Response.SearhResponse
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import kotlinx.coroutines.CoroutineExceptionHandler
@@ -12,6 +14,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.create
 import retrofit2.http.GET
 import retrofit2.http.Query
+import java.util.concurrent.TimeUnit
 
 interface NetworkService {
 
@@ -21,8 +24,9 @@ interface NetworkService {
         query: String
     ): Deferred<SearhResponse>
 
+
     companion object{
-        operator fun invoke():NetworkService{
+        operator fun invoke(connectivityInterceptor: ConnectivityInterceptor):NetworkService{
 
             val requestInterceptor = Interceptor {chain ->
                 val url = chain.request()
@@ -34,12 +38,14 @@ interface NetworkService {
                     .newBuilder()
                     .url(url)
                     .build()
-
                 return@Interceptor chain.proceed(request)
             }
 
+
             val OkHttpClient =OkHttpClient.Builder()
                 .addInterceptor(requestInterceptor)
+                .addInterceptor(connectivityInterceptor)
+                .readTimeout(10L,TimeUnit.SECONDS)
                 .build()
 
             return Retrofit

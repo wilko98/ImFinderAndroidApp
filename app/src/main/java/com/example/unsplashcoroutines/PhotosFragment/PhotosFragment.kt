@@ -4,11 +4,13 @@ import android.os.Bundle
 import android.util.Log
 import android.view.*
 import android.widget.SearchView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.unsplashcoroutines.Exeptions.NoConnectivityExeption
 import com.example.unsplashcoroutines.MainActivity
 import com.example.unsplashcoroutines.R
 import com.example.unsplashcoroutines.Response.Result
@@ -35,9 +37,9 @@ class PhotosFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         recycler.layoutManager = GridLayoutManager(context,2,RecyclerView.HORIZONTAL,false)
-        photosAdapter = PhotosAdapter(ArrayList<Result>(10))
+        photosAdapter = PhotosAdapter(ArrayList<Result>(20))
         recycler.adapter = photosAdapter
-        Log.i("photosFragmentb", photosViewModel.toString())
+//        Log.i("photosFragmentb", photosViewModel.toString())
         photosViewModel.searchResponse.observe(this, Observer { photos ->
             photosAdapter.photosList = photos.results
             photosAdapter.notifyDataSetChanged()
@@ -54,7 +56,12 @@ class PhotosFragment : Fragment() {
         searchView.setQueryHint("Search Photos")
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
-                photosViewModel.searchPhotos(query.toString())
+
+                try {
+                    photosViewModel.searchPhotos(query.toString())
+                } catch (e:NoConnectivityExeption){
+                    Toast.makeText(activity,"You are offline",Toast.LENGTH_LONG).show()
+                }
                 return true
             }
 

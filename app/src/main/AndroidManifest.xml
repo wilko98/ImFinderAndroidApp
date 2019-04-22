@@ -3,6 +3,7 @@
           xmlns:dist="http://schemas.android.com/apk/distribution"
           xmlns:tools="http://schemas.android.com/tools" package="com.example.unsplashcoroutines">
 <uses-permission android:name="android.permission.INTERNET"/>
+<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
     <dist:module dist:instant="true"/>
 
     <application
