@@ -2,17 +2,16 @@ package com.example.unsplashcoroutines.Response
 
 import android.content.Context
 import android.net.ConnectivityManager
-import com.example.unsplashcoroutines.Exeptions.NoConnectivityExeption
+import com.example.unsplashcoroutines.Exeptions.NoConnectivityException
 import okhttp3.Interceptor
 import okhttp3.Response
-import org.koin.core.KoinContext
 
 class ConnectivityInterceptorImpl(context: Context) : ConnectivityInterceptor {
 
     val appContext = context.applicationContext
     override fun intercept(chain: Interceptor.Chain): Response {
         if(!isOnline())
-            throw NoConnectivityExeption()
+            throw NoConnectivityException()
         return chain.proceed(chain.request())
     }
 

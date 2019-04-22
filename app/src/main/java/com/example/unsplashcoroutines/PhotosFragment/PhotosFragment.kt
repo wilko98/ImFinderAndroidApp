@@ -1,17 +1,14 @@
 package com.example.unsplashcoroutines.PhotosFragment
 
 import android.os.Bundle
-import android.util.Log
 import android.view.*
 import android.widget.SearchView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.unsplashcoroutines.Exeptions.NoConnectivityExeption
-import com.example.unsplashcoroutines.MainActivity
+import com.example.unsplashcoroutines.Exeptions.NoConnectivityException
 import com.example.unsplashcoroutines.R
 import com.example.unsplashcoroutines.Response.Result
 import kotlinx.android.synthetic.main.fr_photos.*
@@ -59,7 +56,7 @@ class PhotosFragment : Fragment() {
 
                 try {
                     photosViewModel.searchPhotos(query.toString())
-                } catch (e:NoConnectivityExeption){
+                } catch (e:NoConnectivityException){
                     Toast.makeText(activity,"You are offline",Toast.LENGTH_LONG).show()
                 }
                 return true
