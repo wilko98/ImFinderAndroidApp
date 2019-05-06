@@ -1,5 +1,6 @@
 package com.example.unsplashcoroutines.di
 
+import com.example.unsplashcoroutines.BigImale.BigImageActivity
 import com.example.unsplashcoroutines.MainActivity
 import com.example.unsplashcoroutines.NetworkService
 import com.example.unsplashcoroutines.PhotosFragment.PhotosViewModel

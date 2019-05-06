@@ -1,14 +1,17 @@
 package com.example.unsplashcoroutines
 
-import androidx.appcompat.app.AppCompatActivity
+import android.content.Intent
 import android.os.Bundle
+import android.widget.ImageView
+import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.ActivityOptionsCompat
+import androidx.core.view.ViewCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
-import androidx.lifecycle.ViewModelProviders
+import com.example.unsplashcoroutines.BigImale.BigImageActivity
 import com.example.unsplashcoroutines.PhotosFragment.PhotosFragment
-import com.example.unsplashcoroutines.PhotosFragment.PhotosViewModel
 import org.koin.standalone.KoinComponent
-import org.koin.standalone.inject
+
 
 class MainActivity : AppCompatActivity(), KoinComponent {
 
@@ -29,4 +32,17 @@ class MainActivity : AppCompatActivity(), KoinComponent {
             .replace(R.id.container, fragment)
             .commitNow()
     }
+
+    fun openBigImage(url: String,imageView: ImageView){
+        //open image detail activity with shared element transition
+        val intent = Intent(this, BigImageActivity::class.java)
+        intent.putExtra("url",url)
+        val options = ActivityOptionsCompat.makeSceneTransitionAnimation(
+            this,
+            imageView,
+            ViewCompat.getTransitionName(imageView).toString()
+        )
+        startActivity(intent,options.toBundle())
+    }
+
 }

@@ -26,6 +26,8 @@ class PhotosFragment : Fragment() {
         }
     }
 
+
+
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val v: View = inflater.inflate(R.layout.fr_photos, container, false)
         setHasOptionsMenu(true)
@@ -33,7 +35,7 @@ class PhotosFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        recycler.layoutManager = GridLayoutManager(context,2,RecyclerView.HORIZONTAL,false)
+        recycler.layoutManager = GridLayoutManager(context,2)
         photosAdapter = PhotosAdapter(ArrayList<Result>(20))
         recycler.adapter = photosAdapter
 //        Log.i("photosFragmentb", photosViewModel.toString())
@@ -53,7 +55,6 @@ class PhotosFragment : Fragment() {
         searchView.setQueryHint("Search Photos")
         searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
-
                 try {
                     photosViewModel.searchPhotos(query.toString())
                 } catch (e:NoConnectivityException){
