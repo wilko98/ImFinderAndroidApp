@@ -17,6 +17,9 @@ import android.app.Application as Application1
 
 class PhotosFragment : Fragment() {
 
+//TODO обработать состояние без интернета с помощью ROOM *
+//TODO добавить нормальный футер
+//TODO переписать все с использованием репы
     val photosViewModel:PhotosViewModel by inject()
     lateinit var photosAdapter: PhotosAdapter
 
@@ -25,8 +28,6 @@ class PhotosFragment : Fragment() {
             return PhotosFragment()
         }
     }
-
-
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         val v: View = inflater.inflate(R.layout.fr_photos, container, false)

@@ -13,6 +13,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.create
 import retrofit2.http.GET
+import retrofit2.http.Path
 import retrofit2.http.Query
 import java.util.concurrent.TimeUnit
 
@@ -24,6 +25,10 @@ interface NetworkService {
         query: String
     ): Deferred<SearhResponse>
 
+    @GET("GET /users/{username}/photos")
+    fun getUsersPhotos(
+        @Path("username") username:String
+    ):Deferred<SearhResponse>
 
     companion object{
         operator fun invoke(connectivityInterceptor: ConnectivityInterceptor):NetworkService{
@@ -33,6 +38,7 @@ interface NetworkService {
                     .url()
                     .newBuilder()
                     .addQueryParameter("client_id",BuildConfig.ACCESS_KEY)
+                    .addQueryParameter("per_page","20")
                     .build()
                 val request = chain.request()
                     .newBuilder()

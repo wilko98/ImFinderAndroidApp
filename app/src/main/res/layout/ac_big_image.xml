@@ -1,16 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<FrameLayout
         xmlns:android="http://schemas.android.com/apk/res/android"
-        android:orientation="vertical"
-        android:background="@android:color/black"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:background="@color/colorPrimary"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:animateLayoutChanges="true"
 >
-
     <ImageView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/image"
+            android:transitionName="image"
+            android:src="@drawable/ic_launcher_background"/>
+    <Button android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_margin="20dp"
+            android:layout_gravity="bottom|end"
+            android:id="@+id/btn_download"
+            android:background="@mipmap/ic_download"
+            android:visibility="gone"
+    />
+    <Button android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_margin="20dp"
+            android:layout_gravity="bottom|center"
+            android:background="@drawable/ic_add"
+            android:id="@+id/btn_add"
+            android:visibility="gone"
+    />
+    <Button android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_margin="20dp"
+            android:layout_gravity="bottom"
+            android:background="@mipmap/ic_like"
+            android:id="@+id/btn_like"
+            android:visibility="gone"
     />
 
-</LinearLayout>
+</FrameLayout>

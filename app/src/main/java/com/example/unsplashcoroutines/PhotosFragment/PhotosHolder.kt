@@ -16,7 +16,7 @@ class PhotosHolder(view:View):RecyclerView.ViewHolder(view){
         likes.text = photo.likes.toString()
         Glide.with(itemView.context).load(photo.urls.regular).into(image)
         image.setOnClickListener {
-            (image.context as MainActivity).openBigImage(photo.urls.regular,image)
+            (image.context as MainActivity).openBigImage(photo.urls.regular,this.image,photo)
         }
     }
 }

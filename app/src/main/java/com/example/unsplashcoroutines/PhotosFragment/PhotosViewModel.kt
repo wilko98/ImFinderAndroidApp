@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.unsplashcoroutines.Exeptions.NoConnectivityException
 import com.example.unsplashcoroutines.MainActivity
 import com.example.unsplashcoroutines.NetworkService
 import com.example.unsplashcoroutines.Response.SearhResponse
@@ -21,7 +22,11 @@ class PhotosViewModel(val networkService: NetworkService) :ViewModel(){
     fun searchPhotos(query:String){
         viewModelScope.launch(Dispatchers.Main) {
             currentQuery = query
-            searchResponse.value = networkService.getPhotos(query).await()
+            try {
+                searchResponse.value = networkService.getPhotos(query).await()
+            }catch (e:NoConnectivityException){
+                Log.i("photosFragment","No Connection")
+            }
         }
     }
 

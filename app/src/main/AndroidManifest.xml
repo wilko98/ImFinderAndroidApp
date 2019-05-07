@@ -22,7 +22,7 @@
                 <category android:name="android.intent.category.LAUNCHER"/>
             </intent-filter>
         </activity>
-        <activity android:name=".BigImale.BigImageActivity">
+        <activity android:name=".BigImale.BigImageActivity" android:theme="@style/AppTheme.slideActivity">
         </activity>
     </application>
 
