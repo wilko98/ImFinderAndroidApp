@@ -1,6 +1,7 @@
 package com.example.unsplashcoroutines.PhotosFragment
 
 import android.os.Bundle
+import android.util.Log
 import android.view.*
 import android.widget.SearchView
 import android.widget.Toast
@@ -20,10 +21,11 @@ class PhotosFragment : Fragment() {
 //TODO обработать состояние без интернета с помощью ROOM *
 //TODO добавить нормальный футер
 //TODO переписать все с использованием репы
+
     val photosViewModel:PhotosViewModel by inject()
     lateinit var photosAdapter: PhotosAdapter
 
-    companion object {
+    companion object{
         fun newInstanse(): PhotosFragment {
             return PhotosFragment()
         }
@@ -39,12 +41,11 @@ class PhotosFragment : Fragment() {
         recycler.layoutManager = GridLayoutManager(context,2)
         photosAdapter = PhotosAdapter(ArrayList<Result>(20))
         recycler.adapter = photosAdapter
-//        Log.i("photosFragmentb", photosViewModel.toString())
         photosViewModel.searchResponse.observe(this, Observer { photos ->
             photosAdapter.photosList = photos.results
+//            Toast.makeText(context,photos.results[0].id,Toast.LENGTH_SHORT).show()
             photosAdapter.notifyDataSetChanged()
         })
-
 
     }
 
@@ -59,7 +60,7 @@ class PhotosFragment : Fragment() {
                 try {
                     photosViewModel.searchPhotos(query.toString())
                 } catch (e:NoConnectivityException){
-                    Toast.makeText(activity,"You are offline",Toast.LENGTH_LONG).show()
+//                    Toast.makeText(this,"You are offline",Toast.LENGTH_LONG).show()
                 }
                 return true
             }
@@ -71,8 +72,12 @@ class PhotosFragment : Fragment() {
         super.onCreateOptionsMenu(menu, inflater)
     }
 
+    override fun onPause() {
+        Log.i("PhotosFragment","on Pause")
+        super.onPause()
+    }
     override fun onDestroy() {
+        Log.i("PhotosFragment","on Destroy")
         super.onDestroy()
     }
-
 }

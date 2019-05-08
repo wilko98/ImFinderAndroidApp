@@ -1,16 +1,26 @@
 package com.example.unsplashcoroutines.Response
 
+import androidx.room.*
+import com.google.gson.annotations.Expose
+
+@Entity(tableName = "Results")
 data class Result(
-    val color: String,
-    val created_at: String,
-    val current_user_collections: List<Any>,
-    val description: String,
-    val height: Int,
-    val id: String,
-    val liked_by_user: Boolean,
-    val likes: Int,
-    val links: Links,
-    val urls: Urls,
-    val user: User,
-    val width: Int
+
+    @PrimaryKey
+    val id: String = "",
+//    val color: String,
+//    val created_at: String,
+//    val description: String,
+//    val height: Int,
+//    val liked_by_user: Boolean,
+    @ColumnInfo(name = "likes")
+    var likes: Int =0,
+
+    @Embedded
+    var links: Links= Links("","",""),
+    @Embedded
+    var urls: Urls= Urls("","","","",""),
+    @Embedded
+    var user: User=User("","","","","","","","")
+//    var width: Int=0
 )

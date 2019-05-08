@@ -12,4 +12,6 @@ val appModule = module {
     single { ConnectivityInterceptorImpl( context = get() ) }
     single { NetworkService.invoke(get<ConnectivityInterceptorImpl>()) }
     single { PhotosViewModel(get()) }
+
+
 }
