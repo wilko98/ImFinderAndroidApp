@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">UnsplashCoroutines</string>
+    <string name="downloadBtn">Download</string>
+    <string name="randomize">Randomize</string>
+    <string name="download_permission_explanation">It is necessary to allow downloading in the application settings
+    </string>
+</resources>
