@@ -1,4 +1,4 @@
-package com.example.unsplashcoroutines.db
+package com.example.data
 
 import androidx.room.Database
 import androidx.room.RoomDatabase

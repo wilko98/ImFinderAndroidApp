@@ -12,19 +12,19 @@ import kotlinx.android.synthetic.main.li_photo.view.*
 
 class PhotosHolder(view:View):RecyclerView.ViewHolder(view){
     val image = view.li_image
-    val author = view.author
-    val likes = view.number_of_likes
+//    val author = view.author
+//    val likes = view.number_of_likes
     fun bind(photo: Result){
-        author.text = photo.user.username
-        likes.text = photo.likes.toString()
+//        author.text = photo.user.username
+//        likes.text = photo.likes.toString()
         Glide.with(itemView.context)
             .load(photo.urls.regular)
-//            .diskCacheStrategy(DiskCacheStrategy.NONE)
-//            .skipMemoryCache(true)
+            .centerCrop()
+            .diskCacheStrategy(DiskCacheStrategy.NONE)
             .into(image)
 
         image.setOnClickListener {
-            (image.context as MainActivity).openBigImage(photo.urls.regular,this.image,photo)
+            (image.context as MainActivity).openBigImage(photo.urls.regular,photo.urls.full,this.image,photo)
         }
     }
 }

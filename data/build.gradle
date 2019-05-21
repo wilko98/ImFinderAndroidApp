@@ -9,19 +9,18 @@ apply plugin: "kotlin-kapt"
 android {
     compileSdkVersion 28
 
-
     defaultConfig {
         minSdkVersion 23
         targetSdkVersion 28
         versionCode 1
         versionName "1.0"
 
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
-
 
         buildConfigField "String" ,"API_URL", '"https://api.unsplash.com/"'
         buildConfigField "String" ,"ACCESS_KEY", '"bd62126574d597fdf8368caf9a5c9a1cd745d48952777cce8109a083cf8bfe1d"'
         buildConfigField "String" ,"SECRET_KEY", '"f7230c8493ff88228d82f551294d23016caa635a6dbaa16705c7f16d42edd496"'
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
     }
 

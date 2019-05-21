@@ -38,8 +38,8 @@ class PhotosFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        recycler.layoutManager = GridLayoutManager(context,2)
-        photosAdapter = PhotosAdapter(ArrayList<Result>(20))
+        recycler.layoutManager = GridLayoutManager(context,3)
+        photosAdapter = PhotosAdapter(ArrayList<Result>(30))
         recycler.adapter = photosAdapter
         photosViewModel.searchResponse.observe(this, Observer { photos ->
             photosAdapter.photosList = photos

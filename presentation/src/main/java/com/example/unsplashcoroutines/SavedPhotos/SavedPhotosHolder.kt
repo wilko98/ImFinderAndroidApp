@@ -4,13 +4,12 @@ import android.graphics.BitmapFactory
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 import com.example.unsplashcoroutines.MainActivity
-import com.example.unsplashcoroutines.db.dbPhoto
+import com.example.data.dbPhoto
 import kotlinx.android.synthetic.main.li_saved_photo.view.*
-import java.io.ByteArrayInputStream
 
 class SavedPhotosHolder(v: View) : RecyclerView.ViewHolder(v){
     val image = v.saved_image
-    fun bind(dbPhoto: dbPhoto){
+    fun bind(dbPhoto: com.example.data.dbPhoto){
         val bitmap = BitmapFactory.decodeByteArray(dbPhoto.image,0,dbPhoto.image.size)
         image.setImageBitmap(bitmap)
         image.setOnClickListener {

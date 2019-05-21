@@ -2,9 +2,7 @@ package com.example.unsplashcoroutines.BigImale
 
 import android.Manifest
 import android.app.AlertDialog
-import android.content.DialogInterface
 import android.content.pm.PackageManager
-import android.content.pm.PermissionInfo
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
@@ -17,19 +15,13 @@ import kotlinx.android.synthetic.main.ac_big_image.*
 import org.koin.android.ext.android.inject
 import android.graphics.Bitmap
 import androidx.core.app.ActivityCompat
-import androidx.core.app.DialogCompat
 import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.toBitmap
-import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.example.unsplashcoroutines.R
-import com.example.unsplashcoroutines.db.DAO
-import com.example.unsplashcoroutines.db.dbPhoto
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.coroutineScope
 import kotlinx.coroutines.launch
 import java.io.ByteArrayOutputStream
-import java.security.Permissions
 
 
 //TODO добавить вию модель *
@@ -37,7 +29,7 @@ import java.security.Permissions
 class BigImageActivity : AppCompatActivity() {
 
     val downloader: Downloader by inject()
-    val DAO: DAO by inject()
+    val DAO: com.example.data.DAO by inject()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -93,7 +85,7 @@ class BigImageActivity : AppCompatActivity() {
             }
         } else {
             Toast.makeText(this, "downloading", Toast.LENGTH_LONG).show()
-            downloader.Download(intent.getStringExtra("url"))
+            downloader.Download(intent.getStringExtra("urlFull"))
         }
     }
 
@@ -102,7 +94,7 @@ class BigImageActivity : AppCompatActivity() {
         image.drawable.toBitmap().compress(Bitmap.CompressFormat.JPEG, 100, stream)
         val bytes = stream.toByteArray()
         GlobalScope.launch(Dispatchers.Default) {
-            DAO.insertPhoto(dbPhoto(intent.getStringExtra("url"), bytes))
+            DAO.insertPhoto(com.example.data.dbPhoto(intent.getStringExtra("url"), bytes))
         }
         Toast.makeText(this,"Photo added to app gallery",Toast.LENGTH_SHORT).show()
     }

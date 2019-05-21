@@ -1,12 +1,10 @@
-package com.example.unsplashcoroutines.db
+package com.example.data
 
-import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy.REPLACE
 import androidx.room.Query
-import kotlinx.coroutines.Deferred
 
 
 @Dao

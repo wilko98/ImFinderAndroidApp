@@ -8,8 +8,7 @@ import com.example.unsplashcoroutines.NetworkService
 import com.example.unsplashcoroutines.PhotosFragment.PhotosViewModel
 import com.example.unsplashcoroutines.Response.ConnectivityInterceptorImpl
 import com.example.unsplashcoroutines.SavedPhotos.SavedPhotosViewModel
-import com.example.unsplashcoroutines.db.DAO
-import com.example.unsplashcoroutines.db.DataBase
+
 import org.koin.android.ext.koin.androidContext
 import org.koin.dsl.module.module
 
@@ -24,8 +23,8 @@ val appModule = module {
 
 }
 
-fun createDataBaseRoom(context: Context): DAO {
-    return Room.databaseBuilder(context,DataBase::class.java,"results.db")
+fun createDataBaseRoom(context: Context): com.example.data.DAO {
+    return Room.databaseBuilder(context, com.example.data.DataBase::class.java,"results.db")
         .fallbackToDestructiveMigration()
         .build().userDao()
 }

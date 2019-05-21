@@ -1,16 +1,14 @@
 package com.example.unsplashcoroutines.SavedPhotos
 
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
-import com.example.unsplashcoroutines.db.DAO
-import com.example.unsplashcoroutines.db.dbPhoto
+
 import kotlinx.coroutines.*
 
-class SavedPhotosViewModel(val dao: DAO) : ViewModel() {
+class SavedPhotosViewModel(val dao: com.example.data.DAO) : ViewModel() {
 
-    private lateinit var photos: List<dbPhoto>
+    private lateinit var photos: List<com.example.data.dbPhoto>
 
-    fun getPhotos(): List<dbPhoto> {
+    fun getPhotos(): List<com.example.data.dbPhoto> {
         runBlocking(Dispatchers.Default) {
             photos = dao.getPhotos()
         }
