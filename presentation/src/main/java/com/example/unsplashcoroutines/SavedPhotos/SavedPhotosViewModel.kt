@@ -1,10 +1,11 @@
 package com.example.unsplashcoroutines.SavedPhotos
 
 import androidx.lifecycle.ViewModel
+import com.example.data.db.DAO
 
 import kotlinx.coroutines.*
 
-class SavedPhotosViewModel(val dao: com.example.data.DAO) : ViewModel() {
+class SavedPhotosViewModel(val dao: DAO) : ViewModel() {
 
     private lateinit var photos: List<com.example.data.dbPhoto>
 

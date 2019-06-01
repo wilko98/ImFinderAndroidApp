@@ -5,17 +5,15 @@ import android.util.Log
 import android.view.*
 import android.widget.SearchView
 import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.example.unsplashcoroutines.Exeptions.NoConnectivityException
+import com.example.data.Exeptions.NoConnectivityException
 import com.example.unsplashcoroutines.R
-import com.example.unsplashcoroutines.Response.Result
+import com.example.data.Response.PhotoResult
 import kotlinx.android.synthetic.main.fr_photos.*
 import org.koin.android.ext.android.inject
-import android.app.Application as Application1
 
 class PhotosFragment : Fragment() {
 
@@ -39,9 +37,16 @@ class PhotosFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         recycler.layoutManager = GridLayoutManager(context,3)
-        photosAdapter = PhotosAdapter(ArrayList<Result>(30))
+        photosAdapter = PhotosAdapter(ArrayList<PhotoResult>(30))
         recycler.adapter = photosAdapter
         photosViewModel.searchResponse.observe(this, Observer { photos ->
+            if (photos.size==0) {
+                error_view.isVisible = true
+                recycler.isVisible = false
+            }else{
+                error_view.isVisible = false
+                recycler.isVisible = true
+            }
             photosAdapter.photosList = photos
             photosAdapter.notifyDataSetChanged()
         })
@@ -57,7 +62,8 @@ class PhotosFragment : Fragment() {
                 try {
                     photosViewModel.searchPhotos(query.toString())
                 } catch (e:NoConnectivityException){
-//                    Toast.makeText(this,"You are offline",Toast.LENGTH_LONG).show()
+                    Toast.makeText(context,"You are offline",Toast.LENGTH_LONG).show()
+                    
                 }
                 return true
             }

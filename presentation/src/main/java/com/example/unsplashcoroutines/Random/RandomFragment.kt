@@ -7,24 +7,17 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
-import com.bumptech.glide.Glide
-import com.example.unsplashcoroutines.MainActivity
-import com.example.unsplashcoroutines.NetworkService
+import com.example.data.NetworkRepository
 import com.example.unsplashcoroutines.PhotosFragment.PhotosAdapter
 import com.example.unsplashcoroutines.PhotosFragment.PhotosViewModel
 import com.example.unsplashcoroutines.R
-import com.example.unsplashcoroutines.Response.Result
+import com.example.data.Response.PhotoResult
 import kotlinx.android.synthetic.main.fr_photos.*
-import kotlinx.android.synthetic.main.fr_random.*
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.GlobalScope
-import kotlinx.coroutines.launch
 import org.koin.android.ext.android.inject
-import java.net.URI
 
 class RandomFragment() : Fragment(){
 
-    val networkService:NetworkService  by inject()
+    val networkService: NetworkRepository  by inject()
 
 
     val photosViewModel: PhotosViewModel by inject()
@@ -44,7 +37,7 @@ class RandomFragment() : Fragment(){
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         recycler.layoutManager = GridLayoutManager(context,3)
-        photosAdapter = PhotosAdapter(ArrayList<Result>(30))
+        photosAdapter = PhotosAdapter(ArrayList<PhotoResult>(30))
         recycler.adapter = photosAdapter
         photosViewModel.randomResponse.observe(this, Observer { photos ->
             photosAdapter.photosList = photos
@@ -52,7 +45,7 @@ class RandomFragment() : Fragment(){
         })
 
         photosViewModel.getRandomPhotos()
-//        var randomPhoto:Result
+//        var randomPhoto:PhotoResult
 //        randomBtn.setOnClickListener {
 //            GlobalScope.launch(Dispatchers.Main) {
 //                randomPhoto = networkService.getRandomPhoto().await()

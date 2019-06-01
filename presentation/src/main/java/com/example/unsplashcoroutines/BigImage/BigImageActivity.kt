@@ -17,6 +17,7 @@ import android.graphics.Bitmap
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.toBitmap
+import com.example.data.db.DAO
 import com.example.unsplashcoroutines.R
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
@@ -29,7 +30,7 @@ import java.io.ByteArrayOutputStream
 class BigImageActivity : AppCompatActivity() {
 
     val downloader: Downloader by inject()
-    val DAO: com.example.data.DAO by inject()
+    val DAO: DAO by inject()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -96,7 +97,7 @@ class BigImageActivity : AppCompatActivity() {
         GlobalScope.launch(Dispatchers.Default) {
             DAO.insertPhoto(com.example.data.dbPhoto(intent.getStringExtra("url"), bytes))
         }
-        Toast.makeText(this,"Photo added to app gallery",Toast.LENGTH_SHORT).show()
+        Toast.makeText(this,"PhotoResult added to app gallery",Toast.LENGTH_SHORT).show()
     }
 
 

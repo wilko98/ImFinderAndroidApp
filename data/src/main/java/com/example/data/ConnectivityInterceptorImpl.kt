@@ -1,8 +1,8 @@
-package com.example.unsplashcoroutines.Response
+package com.example.data
 
 import android.content.Context
 import android.net.ConnectivityManager
-import com.example.unsplashcoroutines.Exeptions.NoConnectivityException
+import com.example.data.Exeptions.NoConnectivityException
 import okhttp3.Interceptor
 import okhttp3.Response
 

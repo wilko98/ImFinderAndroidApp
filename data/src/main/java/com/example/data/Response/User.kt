@@ -1,10 +1,4 @@
-package com.example.unsplashcoroutines.Response
-
-import androidx.room.Embedded
-import androidx.room.Entity
-import androidx.room.PrimaryKey
-import com.google.gson.annotations.Expose
-import com.google.gson.annotations.SerializedName
+package com.example.data.Response
 
 data class User(
     val first_name: String?,

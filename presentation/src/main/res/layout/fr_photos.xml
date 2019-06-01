@@ -7,9 +7,16 @@
         android:layout_height="match_parent"
 >
     <androidx.recyclerview.widget.RecyclerView
+            android:visibility="visible"
             android:id="@+id/recycler"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"/>
+        <include
+                android:id="@+id/error_view"
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                layout="@layout/error_view"
+        />
 
-    </androidx.recyclerview.widget.RecyclerView>
 </LinearLayout>

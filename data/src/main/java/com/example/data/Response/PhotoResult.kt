@@ -1,9 +1,6 @@
-package com.example.unsplashcoroutines.Response
+package com.example.data.Response
 
-import androidx.room.*
-import com.google.gson.annotations.Expose
-
-data class Result(
+data class PhotoResult(
     val color: String,
     val created_at: String,
     val description: String,

@@ -1,4 +1,4 @@
-package com.example.unsplashcoroutines.Response
+package com.example.data.Response
 
 data class ProfileImage(
     val large: String,

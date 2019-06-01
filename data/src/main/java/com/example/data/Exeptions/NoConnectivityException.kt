@@ -1,4 +1,4 @@
-package com.example.unsplashcoroutines.Exeptions
+package com.example.data.Exeptions
 
 import java.io.IOException
 

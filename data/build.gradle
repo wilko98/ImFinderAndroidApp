@@ -78,5 +78,4 @@ dependencies {
     // koin for Android and AndroidX
     implementation 'org.koin:koin-androidx-scope:1.0.2'
     implementation 'org.koin:koin-android-scope:1.0.2'
-    implementation 'com.google.android.gms:play-services-ads:17.2.0'
 }

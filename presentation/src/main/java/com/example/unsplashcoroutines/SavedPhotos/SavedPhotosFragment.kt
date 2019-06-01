@@ -7,14 +7,13 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.unsplashcoroutines.R
-import com.example.data.DAO
-import com.example.data.dbPhoto
+import com.example.data.db.DAO
 import kotlinx.android.synthetic.main.fr_saved_photos.*
 import org.koin.android.ext.android.inject
 
 class SavedPhotosFragment : Fragment() {
 
-    val dao: com.example.data.DAO by inject()
+    val dao: DAO by inject()
     val savedPhotosViewModel: SavedPhotosViewModel by inject()
 
     companion object {
