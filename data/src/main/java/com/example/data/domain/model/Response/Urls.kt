@@ -1,4 +1,4 @@
-package com.example.data.Response
+package com.example.data.domain.model.Response
 
 import androidx.room.Entity
 

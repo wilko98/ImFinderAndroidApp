@@ -5,42 +5,28 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.data.Exeptions.NoConnectivityException
-import com.example.data.NetworkRepository
-import com.example.data.Response.PhotoResult
+import com.example.data.NetworkService
+import com.example.data.domain.model.Response.PhotoResult
 import com.example.data.db.DAO
+import com.example.data.domain.Interactors.NetworkInteractor
+import com.example.data.domain.model.Response.SearchResponse
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class PhotosViewModel(val networkService: NetworkRepository, val dao: DAO) : ViewModel() {
+class PhotosViewModel(val networkInteractor: NetworkInteractor, dbInteractor: NetworkInteractor) : ViewModel() {
 
     init {
         Log.i("photosFragment", "ViewModelCreated")
     }
 
-
-    var searchResponse = MutableLiveData<List<PhotoResult>>()
+    var searchResponse = MutableLiveData<SearchResponse>()
     var randomResponse = MutableLiveData<List<PhotoResult>>()
-    var currentQuery = ""
     fun searchPhotos(query: String) {
-        viewModelScope.launch(Dispatchers.Main) {
-            currentQuery = query
-
-            try {
-                val response = networkService.getPhotos(query).await()
-                searchResponse.value = response.photoResults
-            } catch (e: NoConnectivityException) {
-                Log.i("photosFragment", "No Connection")
-            }
-        }
+            searchResponse.value = networkInteractor.getPhotos(query)
     }
     fun getRandomPhotos() {
         viewModelScope.launch(Dispatchers.Main) {
-            try {
-                val randomPhotosArray = networkService.getRandomPhotos(30).await()
-                randomResponse.value = randomPhotosArray
-            } catch (e: NoConnectivityException) {
-                Log.i("photosFragment", "No Connection")
-            }
+            randomResponse.value = networkInteractor.getRandomPhotos(30)
         }
     }
 

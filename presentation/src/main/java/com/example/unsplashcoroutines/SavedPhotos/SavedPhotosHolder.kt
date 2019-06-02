@@ -6,6 +6,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.unsplashcoroutines.MainActivity
 import com.example.data.dbPhoto
 import kotlinx.android.synthetic.main.li_saved_photo.view.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.GlobalScope
 
 class SavedPhotosHolder(v: View) : RecyclerView.ViewHolder(v){
     val image = v.saved_image
@@ -13,7 +15,7 @@ class SavedPhotosHolder(v: View) : RecyclerView.ViewHolder(v){
         val bitmap = BitmapFactory.decodeByteArray(dbPhoto.image,0,dbPhoto.image.size)
         image.setImageBitmap(bitmap)
         image.setOnClickListener {
-            v -> (image.context as MainActivity).dao.deletePhoto(dbPhoto)
+            v -> (image.context as MainActivity).dbInteractor.deletePhoto(dbPhoto)
         }
     }
 }

@@ -5,7 +5,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.load.engine.DiskCacheStrategy
 import com.example.unsplashcoroutines.MainActivity
-import com.example.data.Response.PhotoResult
+import com.example.data.domain.model.Response.PhotoResult
 import kotlinx.android.synthetic.main.li_photo.view.*
 
 class PhotosHolder(view:View):RecyclerView.ViewHolder(view){

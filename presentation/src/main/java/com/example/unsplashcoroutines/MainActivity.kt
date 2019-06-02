@@ -10,16 +10,17 @@ import androidx.fragment.app.Fragment
 import com.example.unsplashcoroutines.BigImale.BigImageActivity
 import com.example.unsplashcoroutines.PhotosFragment.PhotosFragment
 import com.example.unsplashcoroutines.Random.RandomFragment
-import com.example.data.Response.PhotoResult
+import com.example.data.domain.model.Response.PhotoResult
 import com.example.unsplashcoroutines.SavedPhotos.SavedPhotosFragment
 import com.example.data.db.DAO
+import com.example.data.domain.Interactors.dbInteractor
 import org.koin.android.ext.android.inject
 import org.koin.standalone.KoinComponent
 
 
 class MainActivity : AppCompatActivity(), KoinComponent {
 
-    val dao: DAO by inject()
+    val dbInteractor: dbInteractor by inject()
     override fun onCreate(savedInstanceState: Bundle?){
         super.onCreate(savedInstanceState)
         setContentView(R.layout.ac_main)

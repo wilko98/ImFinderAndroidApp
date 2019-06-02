@@ -34,7 +34,6 @@ android {
 }
 
 dependencies {
-    implementation project(":domain")
 
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation"org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
@@ -78,4 +77,5 @@ dependencies {
     // koin for Android and AndroidX
     implementation 'org.koin:koin-androidx-scope:1.0.2'
     implementation 'org.koin:koin-android-scope:1.0.2'
+    implementation project(path: ':domain')
 }

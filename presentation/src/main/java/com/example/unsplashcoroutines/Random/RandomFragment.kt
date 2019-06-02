@@ -7,17 +7,17 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
-import com.example.data.NetworkRepository
+import com.example.data.NetworkService
 import com.example.unsplashcoroutines.PhotosFragment.PhotosAdapter
 import com.example.unsplashcoroutines.PhotosFragment.PhotosViewModel
 import com.example.unsplashcoroutines.R
-import com.example.data.Response.PhotoResult
+import com.example.data.domain.model.Response.PhotoResult
 import kotlinx.android.synthetic.main.fr_photos.*
 import org.koin.android.ext.android.inject
 
 class RandomFragment() : Fragment(){
 
-    val networkService: NetworkRepository  by inject()
+    val networkService: NetworkService  by inject()
 
 
     val photosViewModel: PhotosViewModel by inject()
@@ -45,16 +45,7 @@ class RandomFragment() : Fragment(){
         })
 
         photosViewModel.getRandomPhotos()
-//        var randomPhoto:PhotoResult
-//        randomBtn.setOnClickListener {
-//            GlobalScope.launch(Dispatchers.Main) {
-//                randomPhoto = networkService.getRandomPhoto().await()
-//                Glide.with(this@RandomFragment).load(randomPhoto.urls.regular).into(randomPhotoIv)
-//                randomPhotoIv.setOnClickListener {
-//                    (context as MainActivity).openBigImage(randomPhoto.urls.regular,randomPhoto.urls.full,randomPhotoIv,randomPhoto)
-//                }
-//            }
-//        }
+
     }
 
 }

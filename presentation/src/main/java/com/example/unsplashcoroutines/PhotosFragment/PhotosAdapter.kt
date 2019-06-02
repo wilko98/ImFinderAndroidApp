@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.unsplashcoroutines.R
-import com.example.data.Response.PhotoResult
+import com.example.data.domain.model.Response.PhotoResult
 
 class PhotosAdapter(var photosList: List<PhotoResult>) :RecyclerView.Adapter<PhotosHolder>(){
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PhotosHolder {

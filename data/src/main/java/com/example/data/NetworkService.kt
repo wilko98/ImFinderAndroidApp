@@ -1,7 +1,7 @@
 package com.example.data
 
-import com.example.data.Response.PhotoResult
-import com.example.data.Response.SearchResponse
+import com.example.data.domain.model.Response.PhotoResult
+import com.example.data.domain.model.Response.SearchResponse
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import kotlinx.coroutines.Deferred
 import okhttp3.Interceptor
@@ -14,7 +14,7 @@ import retrofit2.http.Query
 import java.util.concurrent.TimeUnit
 
 
-interface NetworkRepository {
+interface NetworkService {
 
     @GET("/search/photos")
     fun getPhotos(
@@ -37,7 +37,7 @@ interface NetworkRepository {
     ): Deferred<List<PhotoResult>>
 
     companion object {
-        operator fun invoke(connectivityInterceptor: ConnectivityInterceptor): NetworkRepository {
+        operator fun invoke(connectivityInterceptor: ConnectivityInterceptor): NetworkService {
 
             val requestInterceptor = Interceptor { chain ->
                 val url = chain.request()
@@ -65,7 +65,7 @@ interface NetworkRepository {
                 .baseUrl(BuildConfig.API_URL)
                 .addCallAdapterFactory(CoroutineCallAdapterFactory())
                 .addConverterFactory(GsonConverterFactory.create())
-                .build().create(NetworkRepository::class.java)
+                .build().create(NetworkService::class.java)
         }
 
     }

@@ -11,7 +11,7 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.data.Exeptions.NoConnectivityException
 import com.example.unsplashcoroutines.R
-import com.example.data.Response.PhotoResult
+import com.example.data.domain.model.Response.PhotoResult
 import kotlinx.android.synthetic.main.fr_photos.*
 import org.koin.android.ext.android.inject
 
@@ -40,15 +40,15 @@ class PhotosFragment : Fragment() {
         photosAdapter = PhotosAdapter(ArrayList<PhotoResult>(30))
         recycler.adapter = photosAdapter
         photosViewModel.searchResponse.observe(this, Observer { photos ->
-            if (photos.size==0) {
+            if (photos == null) {
                 error_view.isVisible = true
                 recycler.isVisible = false
             }else{
                 error_view.isVisible = false
                 recycler.isVisible = true
+                photosAdapter.photosList = photos.photoResults
+                photosAdapter.notifyDataSetChanged()
             }
-            photosAdapter.photosList = photos
-            photosAdapter.notifyDataSetChanged()
         })
     }
 
