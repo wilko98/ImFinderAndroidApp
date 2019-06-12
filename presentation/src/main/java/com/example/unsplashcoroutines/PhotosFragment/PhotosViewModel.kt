@@ -10,8 +10,7 @@ import com.example.data.domain.model.Response.PhotoResult
 import com.example.data.db.DAO
 import com.example.data.domain.Interactors.NetworkInteractor
 import com.example.data.domain.model.Response.SearchResponse
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
+import kotlinx.coroutines.*
 
 class PhotosViewModel(val networkInteractor: NetworkInteractor, dbInteractor: NetworkInteractor) : ViewModel() {
 
@@ -22,11 +21,13 @@ class PhotosViewModel(val networkInteractor: NetworkInteractor, dbInteractor: Ne
     var searchResponse = MutableLiveData<SearchResponse>()
     var randomResponse = MutableLiveData<List<PhotoResult>>()
     fun searchPhotos(query: String) {
+        CoroutineScope(Dispatchers.Main).launch {
             searchResponse.value = networkInteractor.getPhotos(query)
+        }
     }
     fun getRandomPhotos() {
-        viewModelScope.launch(Dispatchers.Main) {
-            randomResponse.value = networkInteractor.getRandomPhotos(30)
+        CoroutineScope(Dispatchers.Main).launch {
+                randomResponse.value = networkInteractor.getRandomPhotos(30)
         }
     }
 

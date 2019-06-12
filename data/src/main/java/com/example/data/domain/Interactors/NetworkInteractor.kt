@@ -5,33 +5,27 @@ import com.example.data.Exeptions.NoConnectivityException
 import com.example.data.NetworkService
 import com.example.data.domain.model.Response.PhotoResult
 import com.example.data.domain.model.Response.SearchResponse
-import kotlinx.coroutines.Deferred
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.*
+import retrofit2.Response
 import retrofit2.http.Query
 
 class NetworkInteractor(val networkService: NetworkService) {
-    fun getPhotos(query: String): SearchResponse? {
-        var result: SearchResponse ?= null
-        runBlocking(Dispatchers.Default) {
+    suspend fun getPhotos(query: String): SearchResponse? {
             try {
-                result = networkService.getPhotos(query).await()
+                return networkService.getPhotos(query).await().body()
+//                Log.i("retrofitResponse",result?.code().toString())
             } catch (e: NoConnectivityException) {
                 Log.i("photosFragment", "No Connection")
+                return null
             }
         }
-        return result
-    }
 
-    fun getRandomPhotos(query: Int): List<PhotoResult> {
-        var result: List<PhotoResult> = ArrayList(0)
-        runBlocking(Dispatchers.Default) {
+    suspend fun getRandomPhotos(query: Int): List<PhotoResult>? {
             try {
-                result = networkService.getRandomPhotos(query).await()
+                return networkService.getRandomPhotos(query).await().body()
             } catch (e: NoConnectivityException) {
                 Log.i("photosFragment", "No Connection")
+                return null
             }
-        }
-        return result
     }
 }

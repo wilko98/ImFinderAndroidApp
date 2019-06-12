@@ -6,6 +6,7 @@ import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterF
 import kotlinx.coroutines.Deferred
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
+import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
@@ -20,21 +21,21 @@ interface NetworkService {
     fun getPhotos(
         @Query("query")
         query: String
-    ): Deferred<SearchResponse>
+    ): Deferred<Response<SearchResponse>>
 
     @GET("/users/{username}/photos")
     fun getUsersPhotos(
         @Path("username") username: String
-    ): Deferred<SearchResponse>
+    ): Deferred<Response<SearchResponse>>
 
     @GET("/photos/random")
-    fun getRandomPhoto(): Deferred<PhotoResult>
+    fun getRandomPhoto(): Deferred<Response<PhotoResult>>
 
     @GET("/photos/random")
     fun getRandomPhotos(
         @Query("count")
         number: Int
-    ): Deferred<List<PhotoResult>>
+    ): Deferred<Response<List<PhotoResult>>>
 
     companion object {
         operator fun invoke(connectivityInterceptor: ConnectivityInterceptor): NetworkService {
