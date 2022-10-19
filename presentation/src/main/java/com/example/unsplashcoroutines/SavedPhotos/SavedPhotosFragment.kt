@@ -6,8 +6,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.GridLayoutManager
-import com.example.unsplashcoroutines.R
 import com.example.data.db.DAO
+import com.example.unsplashcoroutines.R
 import kotlinx.android.synthetic.main.fr_saved_photos.*
 import org.koin.android.ext.android.inject
 
@@ -23,7 +23,11 @@ class SavedPhotosFragment : Fragment() {
 
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         return inflater.inflate(R.layout.fr_saved_photos, container, false)
     }
 

@@ -3,10 +3,10 @@ package com.example.unsplashcoroutines.PhotosFragment
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.example.unsplashcoroutines.R
 import com.example.data.domain.model.Response.PhotoResult
+import com.example.unsplashcoroutines.R
 
-class PhotosAdapter(var photosList: List<PhotoResult>) :RecyclerView.Adapter<PhotosHolder>(){
+class PhotosAdapter(var photosList: List<PhotoResult>) : RecyclerView.Adapter<PhotosHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PhotosHolder {
         return PhotosHolder(
             LayoutInflater.from(parent.context).inflate(

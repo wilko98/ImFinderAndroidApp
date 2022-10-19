@@ -1,23 +1,20 @@
 apply plugin: 'com.android.library'
-
 apply plugin: 'kotlin-android'
-
 apply plugin: 'kotlin-android-extensions'
-
 apply plugin: "kotlin-kapt"
 
 android {
-    compileSdkVersion 28
+    compileSdkVersion 33
 
     defaultConfig {
         minSdkVersion 23
-        targetSdkVersion 28
+        targetSdkVersion 33
         versionCode 1
         versionName "1.0"
-        
-        buildConfigField "String" ,"API_URL", '"https://api.unsplash.com/"'
-        buildConfigField "String" ,"ACCESS_KEY", '"bd62126574d597fdf8368caf9a5c9a1cd745d48952777cce8109a083cf8bfe1d"'
-        buildConfigField "String" ,"SECRET_KEY", '"f7230c8493ff88228d82f551294d23016caa635a6dbaa16705c7f16d42edd496"'
+
+        buildConfigField "String", "API_URL", '"https://api.unsplash.com/"'
+        buildConfigField "String", "ACCESS_KEY", '"bd62126574d597fdf8368caf9a5c9a1cd745d48952777cce8109a083cf8bfe1d"'
+        buildConfigField "String", "SECRET_KEY", '"f7230c8493ff88228d82f551294d23016caa635a6dbaa16705c7f16d42edd496"'
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
@@ -35,7 +32,7 @@ android {
 dependencies {
 
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation"org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
     implementation 'androidx.appcompat:appcompat:1.0.2'
     implementation 'androidx.core:core-ktx:1.2.0-alpha01'
 
