@@ -3,25 +3,25 @@ package com.example.unsplashcoroutines.BigImale
 import android.Manifest
 import android.app.AlertDialog
 import android.content.pm.PackageManager
+import android.graphics.Bitmap
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.isVisible
-import com.bumptech.glide.Glide
-import com.example.unsplashcoroutines.di.Downloader
-import com.r0adkll.slidr.Slidr
-import kotlinx.android.synthetic.main.ac_big_image.*
-import org.koin.android.ext.android.inject
-import android.graphics.Bitmap
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.toBitmap
+import androidx.core.view.isVisible
+import com.bumptech.glide.Glide
 import com.example.data.db.DAO
 import com.example.unsplashcoroutines.R
+import com.example.unsplashcoroutines.di.Downloader
+import com.r0adkll.slidr.Slidr
+import kotlinx.android.synthetic.main.ac_big_image.*
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import org.koin.android.ext.android.inject
 import java.io.ByteArrayOutputStream
 
 
@@ -61,27 +61,41 @@ class BigImageActivity : AppCompatActivity() {
 
     fun onDownloadClick() {
 
-        if (ContextCompat.checkSelfPermission(this,
-                Manifest.permission.WRITE_EXTERNAL_STORAGE)
-            != PackageManager.PERMISSION_GRANTED) {
+        if (ContextCompat.checkSelfPermission(
+                this,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE
+            )
+            != PackageManager.PERMISSION_GRANTED
+        ) {
             // Permission is not granted. Should we show an explanation?
             val dialogBuilder = AlertDialog.Builder(this)
             dialogBuilder.setMessage("To use this functionality you should allow app to write external storage")
                 .setPositiveButton("i understand") { dialog, which ->
-                    ActivityCompat.requestPermissions(this,
+                    ActivityCompat.requestPermissions(
+                        this,
                         arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE),
-                        1)
+                        1
+                    )
                 }
-                .setNegativeButton("no", { dialog, which ->  })
+                .setNegativeButton("no", { dialog, which -> })
             dialogBuilder.create().show()
-            if (ActivityCompat.shouldShowRequestPermissionRationale(this,
-                    Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
-                Toast.makeText(this,getString(R.string.download_permission_explanation),Toast.LENGTH_SHORT).show()
+            if (ActivityCompat.shouldShowRequestPermissionRationale(
+                    this,
+                    Manifest.permission.WRITE_EXTERNAL_STORAGE
+                )
+            ) {
+                Toast.makeText(
+                    this,
+                    getString(R.string.download_permission_explanation),
+                    Toast.LENGTH_SHORT
+                ).show()
 
             } else {
-                ActivityCompat.requestPermissions(this,
+                ActivityCompat.requestPermissions(
+                    this,
                     arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE),
-                    1)
+                    1
+                )
 
             }
         } else {
@@ -97,9 +111,8 @@ class BigImageActivity : AppCompatActivity() {
         GlobalScope.launch(Dispatchers.Default) {
             DAO.insertPhoto(com.example.data.dbPhoto(intent.getStringExtra("url"), bytes))
         }
-        Toast.makeText(this,"PhotoResult added to app gallery",Toast.LENGTH_SHORT).show()
+        Toast.makeText(this, "PhotoResult added to app gallery", Toast.LENGTH_SHORT).show()
     }
-
 
 
 }

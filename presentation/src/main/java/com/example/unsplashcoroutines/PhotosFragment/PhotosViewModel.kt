@@ -3,16 +3,15 @@ package com.example.unsplashcoroutines.PhotosFragment
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
-import com.example.data.Exeptions.NoConnectivityException
-import com.example.data.NetworkService
-import com.example.data.domain.model.Response.PhotoResult
-import com.example.data.db.DAO
 import com.example.data.domain.Interactors.NetworkInteractor
+import com.example.data.domain.model.Response.PhotoResult
 import com.example.data.domain.model.Response.SearchResponse
-import kotlinx.coroutines.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
-class PhotosViewModel(val networkInteractor: NetworkInteractor, dbInteractor: NetworkInteractor) : ViewModel() {
+class PhotosViewModel(val networkInteractor: NetworkInteractor, dbInteractor: NetworkInteractor) :
+    ViewModel() {
 
     init {
         Log.i("photosFragment", "ViewModelCreated")
@@ -25,9 +24,10 @@ class PhotosViewModel(val networkInteractor: NetworkInteractor, dbInteractor: Ne
             searchResponse.value = networkInteractor.getPhotos(query)
         }
     }
+
     fun getRandomPhotos() {
         CoroutineScope(Dispatchers.Main).launch {
-                randomResponse.value = networkInteractor.getRandomPhotos(30)
+            randomResponse.value = networkInteractor.getRandomPhotos(30)
         }
     }
 

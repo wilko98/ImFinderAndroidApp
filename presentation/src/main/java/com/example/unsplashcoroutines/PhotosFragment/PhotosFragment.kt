@@ -10,8 +10,8 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
 import com.example.data.Exeptions.NoConnectivityException
-import com.example.unsplashcoroutines.R
 import com.example.data.domain.model.Response.PhotoResult
+import com.example.unsplashcoroutines.R
 import kotlinx.android.synthetic.main.fr_photos.*
 import org.koin.android.ext.android.inject
 
@@ -20,30 +20,34 @@ class PhotosFragment : Fragment() {
 //TODO добавить нормальный футер
 //TODO переписать все с использованием репы
 
-    val photosViewModel:PhotosViewModel by inject()
+    val photosViewModel: PhotosViewModel by inject()
     lateinit var photosAdapter: PhotosAdapter
 
-    companion object{
+    companion object {
         fun newInstanse(): PhotosFragment {
             return PhotosFragment()
         }
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         val v: View = inflater.inflate(R.layout.fr_photos, container, false)
         setHasOptionsMenu(true)
         return v
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        recycler.layoutManager = GridLayoutManager(context,3)
+        recycler.layoutManager = GridLayoutManager(context, 3)
         photosAdapter = PhotosAdapter(ArrayList<PhotoResult>(30))
         recycler.adapter = photosAdapter
         photosViewModel.searchResponse.observe(this, Observer { photos ->
             if (photos == null) {
                 error_view.isVisible = true
                 recycler.isVisible = false
-            }else{
+            } else {
                 error_view.isVisible = false
                 recycler.isVisible = true
                 photosAdapter.photosList = photos.photoResults
@@ -61,9 +65,9 @@ class PhotosFragment : Fragment() {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 try {
                     photosViewModel.searchPhotos(query.toString())
-                } catch (e:NoConnectivityException){
-                    Toast.makeText(context,"You are offline",Toast.LENGTH_LONG).show()
-                    
+                } catch (e: NoConnectivityException) {
+                    Toast.makeText(context, "You are offline", Toast.LENGTH_LONG).show()
+
                 }
                 return true
             }
@@ -76,11 +80,12 @@ class PhotosFragment : Fragment() {
     }
 
     override fun onPause() {
-        Log.i("PhotosFragment","on Pause")
+        Log.i("PhotosFragment", "on Pause")
         super.onPause()
     }
+
     override fun onDestroy() {
-        Log.i("PhotosFragment","on Destroy")
+        Log.i("PhotosFragment", "on Destroy")
         super.onDestroy()
     }
 }

@@ -2,8 +2,8 @@ package com.example.unsplashcoroutines.SavedPhotos
 
 import androidx.lifecycle.ViewModel
 import com.example.data.db.DAO
-
-import kotlinx.coroutines.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.runBlocking
 
 class SavedPhotosViewModel(val dao: DAO) : ViewModel() {
 
